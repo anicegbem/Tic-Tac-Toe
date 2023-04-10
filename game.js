@@ -6,7 +6,11 @@ const GameBoard = (() => {
     const playGame = () => {
         array.forEach(cell => {
             cell.addEventListener('click', function() {
-                cell.innerHTML = gameboard[i++];
+                if(cell.innerHTML === "") {
+                    cell.innerHTML = gameboard[i++];
+
+                }
+                
             })
         });
         

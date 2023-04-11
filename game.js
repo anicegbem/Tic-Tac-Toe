@@ -1,24 +1,77 @@
 const GameBoard = (() => {
-    let gameboard = ["x", "o", "x", "o", "x", "o", "x", "o", "x"];
-    let cells = document.getElementsByClassName("cells");
-    let array = Array.from(cells);
-    let i = 0;
-    const playGame = () => {
-        array.forEach(cell => {
-            cell.addEventListener('click', function() {
-                if(cell.innerHTML === "") {
-                    cell.innerHTML = gameboard[i++];
-
-                }
-                
-            })
-        });
-        
-        
-        
-    }
-    return {playGame};
+    let gameboard = [];
+    return {gameboard};
 
 })();
 
-GameBoard.playGame();
+const players = (() => {
+    const player1 = {name: "PlayerOne", sign: "x"};
+    const player2 = {name: "PlayerTwo", sign: "o" };
+    let one = player1.sign;
+    let two = player2.sign;
+    return {one, two};
+   
+})();
+
+
+const gameflow = (() => {
+    let board = GameBoard.gameboard;
+    // // let value = playerSign();
+    // let play = players();
+    // let i = 0;
+    // let cells = [];
+    // if(board.length < 9) {
+    //     board.push(sign); 
+        
+        
+        
+    // }
+
+    /* When UI is incorporated 'sign' will be replaced with if statements for each 
+    player; playerX and playerY */ 
+    
+
+    const placeMark = (sign) => {
+        if(sign === players.one) {
+            let x = "x";
+            let o = "o";
+            let values = [x, o];
+            
+            while(board.length < 9) {
+                board.push(values[board.length % 2]);
+            }
+        }
+        else if(sign === players.two) {
+            let x = "x";
+            let o = "o";
+            let values = [o, x];
+            
+            while(board.length < 9) {
+                board.push(values[board.length % 2]);
+            }
+            
+        }
+
+    }
+
+    return {placeMark};
+    
+    
+
+ 
+   
+ 
+})();
+
+// const PlayerSign = (() => {
+//     //     let play = players();
+//     //     let first = play.one;
+//     //     let second = play.two;
+//     //     console.log(first);
+//     //     return {first, second};
+//     // })
+
+gameflow.placeMark(players.one)
+
+
+

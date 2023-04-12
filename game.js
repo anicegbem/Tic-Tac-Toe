@@ -16,16 +16,11 @@ const players = (() => {
 
 const gameflow = (() => {
     let board = GameBoard.gameboard;
-    // // let value = playerSign();
-    // let play = players();
-    // let i = 0;
-    // let cells = [];
-    // if(board.length < 9) {
-    //     board.push(sign); 
-        
-        
-        
-    // }
+    let one = document.getElementById('one')
+    let two = document.getElementById('two');
+    let cells = document.getElementsByClassName('cells');
+    let array = Array.from(cells);
+    let i = 0;
 
     /* When UI is incorporated 'sign' will be replaced with if statements for each 
     player; playerX and playerY */ 
@@ -52,9 +47,32 @@ const gameflow = (() => {
             
         }
 
+        array.forEach(cell => {
+            cell.addEventListener('click', function() {
+                if(cell.innerHTML === "") {
+                    cell.innerHTML = board[i++];
+
+                }
+                
+            })
+        });
+        
+
     }
 
-    return {placeMark};
+    const choosePlayer = () => {
+        one.addEventListener('click', () => {
+           placeMark(players.one);
+        })
+        two.addEventListener('click', () => {
+            placeMark(players.two);
+        })
+        
+        
+        
+    }
+
+    return {choosePlayer};
     
     
 
@@ -71,7 +89,7 @@ const gameflow = (() => {
 //     //     return {first, second};
 //     // })
 
-gameflow.placeMark(players.one)
+gameflow.choosePlayer();
 
 
 

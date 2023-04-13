@@ -51,6 +51,7 @@ const gameflow = (() => {
             cell.addEventListener('click', function() {
                 if(cell.innerHTML === "") {
                     cell.innerHTML = board[i++];
+    
 
                 }
                 

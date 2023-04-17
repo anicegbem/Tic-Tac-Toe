@@ -21,9 +21,21 @@ const gameflow = (() => {
     let cells = document.getElementsByClassName('cells');
     let array = Array.from(cells);
     let i = 0;
+    let j = 0;
+    let game = [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', '']
+    ];
+    let divs = [];
 
     /* When UI is incorporated 'sign' will be replaced with if statements for each 
     player; playerX and playerY */ 
+    const addSymbol = (row, col, sign) => {
+        if(game[row][col] === '') {
+            game[row][col] = sign;
+        }
+    }
     
 
     const placeMark = (sign) => {
@@ -51,12 +63,24 @@ const gameflow = (() => {
             cell.addEventListener('click', function() {
                 if(cell.innerHTML === "") {
                     cell.innerHTML = board[i++];
+                    let strings = cell.id;
+                    let one = parseInt(strings.charAt(0));
+                    let two = parseInt(strings.charAt(1));
+                    addSymbol(one, two, cell.innerHTML);
+                    // game.push(cell.innerHTML);
+                    // console.log(strings, one, two);
+                    
+                    
+                    
+
     
 
                 }
                 
             })
         });
+
+        
         
 
     }
@@ -73,7 +97,7 @@ const gameflow = (() => {
         
     }
 
-    return {choosePlayer};
+    return {choosePlayer, addSymbol, game, divs};
     
     
 
@@ -91,6 +115,7 @@ const gameflow = (() => {
 //     // })
 
 gameflow.choosePlayer();
+
 
 
 

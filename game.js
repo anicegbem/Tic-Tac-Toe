@@ -36,6 +36,187 @@ const gameflow = (() => {
             game[row][col] = sign;
         }
     }
+
+    const getHorizontal = (sign) => {
+        if(sign[0] === game[0][0] && game[0][1] && game[0][2]) {
+            console.log(`${sign[0]} won`)
+
+        } 
+        // else if (sign[1] === game[0][0] && game[0][1] && game[0][2]) {
+        //     console.log("You won");
+        // }
+        // if(sign[0] === game[1][0] && game[1][1] && game[1][2]) {
+        //     console.log("You won")
+
+        // } else if (sign[1] === game[1][0] && game[1][1] && game[1][2]) {
+        //     console.log("You won");
+
+        // }
+        // if(sign[0] === game[2][0] && game[2][1] && game[2][2]) {
+        //     console.log("You won")
+
+        // } else if (sign[1] === game[2][0] && game[2][1] && game[2][2]) {
+        //     console.log("You won");
+
+        // }
+
+    }
+
+
+    const getWinner = (...sign) => {
+        // Horizontal
+        // console.log(sign, sign[0], sign[1]);
+        // console.log(game);
+        // getHorizontal(players.one);
+        if(sign[0] === game[0][0] && sign[0] === game[0][1] && sign[0] === game[0][2]) {
+            console.log(`${sign[0]} won`);
+            stopClick();
+            // array.forEach(cell => {
+            //     cell.addEventListener('click', function(event){
+            //         event.preventDefault();
+                    
+            //     })
+            // })
+            // console.log(`sign: ${sign[0]}, `)
+
+        }
+        if(sign[0] === game[1][0] && sign[0] === game[1][1] && sign[0] === game[1][2]) {
+            console.log(`${sign[0]} won`);
+            stopClick();
+
+        }
+        if(sign[0] === game[2][0] && sign[0] === game[2][1] && sign[0] === game[2][2]) {
+            console.log(`${sign[0]} won`);
+            stopClick();
+
+        }
+
+        // Player 2
+        if(sign[1] === game[0][0] && sign[1] === game[0][1] && sign[1] === game[0][2]) {
+            console.log(`${sign[1]} won`);
+            stopClick();
+
+        }
+        
+        if(sign[1] === game[1][0] && sign[1] === game[1][1] && sign[1] === game[1][2]) {
+            console.log(`${sign[1]} won`);
+            stopClick();
+
+        }
+        if(sign[1] === game[2][0] && sign[1] === game[2][1] && sign[1] === game[2][2]) {
+            console.log(`${sign[1]} won`);
+            stopClick();
+
+        }
+
+        /* Vertical */
+        if(sign[0] === game[0][0] && sign[0] === game[1][0] && sign[0] === game[2][0]) {
+            console.log("x won");
+            stopClick();
+
+        }
+        if(sign[0] === game[0][1] && sign[0] === game[1][1] && sign[0] === game[2][1]) {
+            console.log("x won");
+            stopClick();
+
+        }
+        if(sign[0] === game[0][2] && sign[0] === game[1][2] && sign[0] === game[2][2]) {
+            console.log("x won");
+            stopClick();
+
+        }
+        // Player 2
+        if(sign[1] === game[0][0] && sign[1] === game[1][0] && sign[1] === game[2][0]) {
+            console.log("o won");
+            stopClick();
+
+        }
+        if(sign[1] === game[0][1] && sign[1] === game[1][1] && sign[1] === game[2][1]) {
+            console.log("o won");
+            stopClick();
+
+        }
+        if(sign[1] === game[0][2] && sign[1] === game[1][2] && sign[1] === game[2][2]) {
+            console.log("o won");
+            stopClick();
+
+        }
+
+        /* Diagonally */
+        if(sign[0] === game[0][0] && sign[0] === game[1][1] && sign[0] === game[2][2]) {
+            console.log("x won");
+            stopClick();
+
+        }
+        if(sign[0] === game[0][2] && sign[0] === game[1][1] && sign[0] === game[2][0]) {
+            console.log("x won");
+            stopClick();
+
+        }
+        // Player 2
+        if(sign[1] === game[0][0] && sign[1] === game[1][1] && sign[1] === game[2][2]) {
+            console.log("o won");
+            stopClick();
+
+        }
+        if(sign[1] === game[0][2] && sign[1] === game[1][1] && sign[1]=== game[2][0]) {
+            console.log("o won");
+            stopClick();
+            
+
+            
+
+
+        }
+        
+        // for(const sign of signs) {
+        //     /* Horizontal */
+        //     if(sign === game[0][0] && game[0][1] && game[0][2]) {
+        //         console.log("You won")
+    
+        //     }
+        //     if(sign === game[1][0] && game[1][1] && game[1][2]) {
+        //         console.log("You won")
+    
+        //     }
+        //     if(sign === game[2][0] && game[2][1] && game[2][2]) {
+        //         console.log("You won")
+    
+        //     }
+    
+        //     /* Vertical */
+        //     if(sign === game[0][0] && game[1][0] && game[2][0]) {
+        //         console.log("You won")
+    
+        //     }
+        //     if(sign === game[0][1] && game[1][1] && game[2][1]) {
+        //         console.log("You won")
+    
+        //     }
+        //     if(sign === game[0][2] && game[1][2] && game[2][2]) {
+        //         console.log("You won")
+    
+        //     }
+    
+        //     /* Diagonally */
+        //     if(sign === game[0][0] && game[1][1] && game[2][2]) {
+        //         console.log("You won")
+    
+        //     }
+        //     if(sign === game[0][2] && game[1][1] && game[2][0]) {
+        //         console.log("You won")
+    
+        //     }
+
+        // }
+        
+        // if(sign === game[2][0] && game[2][1] && game[2][2]) {
+        //     console.log("You won")
+
+        // }
+
+
+    }
     
 
     const placeMark = (sign) => {
@@ -67,6 +248,9 @@ const gameflow = (() => {
                     let one = parseInt(strings.charAt(0));
                     let two = parseInt(strings.charAt(1));
                     addSymbol(one, two, cell.innerHTML);
+                    getWinner(players.one, players.two);
+
+                    // console.log(game);
                     // game.push(cell.innerHTML);
                     // console.log(strings, one, two);
                     
@@ -82,6 +266,7 @@ const gameflow = (() => {
 
         
         
+        
 
     }
 
@@ -95,6 +280,16 @@ const gameflow = (() => {
         
         
         
+    }
+
+    const stopClick = () => {
+        array.forEach(cell => {
+            cell.style.pointerEvents = 'none';
+            // cell.addEventListener('click', function(event){
+            //     // event.preventDefault();
+                
+            // })
+        })
     }
 
     return {choosePlayer, addSymbol, game, divs};

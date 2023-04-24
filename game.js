@@ -28,6 +28,9 @@ const gameflow = (() => {
         ['', '', '']
     ];
     let divs = [];
+    let rows = 3;
+    let cols = 3;
+    let value = '';
 
     /* When UI is incorporated 'sign' will be replaced with if statements for each 
     player; playerX and playerY */ 
@@ -71,6 +74,7 @@ const gameflow = (() => {
         if(sign[0] === game[0][0] && sign[0] === game[0][1] && sign[0] === game[0][2]) {
             console.log(`${sign[0]} won`);
             stopClick();
+            value = true;
             // array.forEach(cell => {
             //     cell.addEventListener('click', function(event){
             //         event.preventDefault();
@@ -83,11 +87,13 @@ const gameflow = (() => {
         if(sign[0] === game[1][0] && sign[0] === game[1][1] && sign[0] === game[1][2]) {
             console.log(`${sign[0]} won`);
             stopClick();
+            value = true;
 
         }
         if(sign[0] === game[2][0] && sign[0] === game[2][1] && sign[0] === game[2][2]) {
             console.log(`${sign[0]} won`);
             stopClick();
+            value = true;
 
         }
 
@@ -95,17 +101,20 @@ const gameflow = (() => {
         if(sign[1] === game[0][0] && sign[1] === game[0][1] && sign[1] === game[0][2]) {
             console.log(`${sign[1]} won`);
             stopClick();
+            value = true;
 
         }
         
         if(sign[1] === game[1][0] && sign[1] === game[1][1] && sign[1] === game[1][2]) {
             console.log(`${sign[1]} won`);
             stopClick();
+            value = true;
 
         }
         if(sign[1] === game[2][0] && sign[1] === game[2][1] && sign[1] === game[2][2]) {
             console.log(`${sign[1]} won`);
             stopClick();
+            value = true;
 
         }
 
@@ -113,32 +122,38 @@ const gameflow = (() => {
         if(sign[0] === game[0][0] && sign[0] === game[1][0] && sign[0] === game[2][0]) {
             console.log("x won");
             stopClick();
+            value = true;
 
         }
         if(sign[0] === game[0][1] && sign[0] === game[1][1] && sign[0] === game[2][1]) {
             console.log("x won");
             stopClick();
+            value = true;
 
         }
         if(sign[0] === game[0][2] && sign[0] === game[1][2] && sign[0] === game[2][2]) {
             console.log("x won");
             stopClick();
+            value = true;
 
         }
         // Player 2
         if(sign[1] === game[0][0] && sign[1] === game[1][0] && sign[1] === game[2][0]) {
             console.log("o won");
             stopClick();
+            value = true;
 
         }
         if(sign[1] === game[0][1] && sign[1] === game[1][1] && sign[1] === game[2][1]) {
             console.log("o won");
             stopClick();
+            value = true;
 
         }
         if(sign[1] === game[0][2] && sign[1] === game[1][2] && sign[1] === game[2][2]) {
             console.log("o won");
             stopClick();
+            value = true;
 
         }
 
@@ -146,28 +161,36 @@ const gameflow = (() => {
         if(sign[0] === game[0][0] && sign[0] === game[1][1] && sign[0] === game[2][2]) {
             console.log("x won");
             stopClick();
+            value = true;
 
         }
         if(sign[0] === game[0][2] && sign[0] === game[1][1] && sign[0] === game[2][0]) {
             console.log("x won");
             stopClick();
+            value = true;
 
         }
         // Player 2
         if(sign[1] === game[0][0] && sign[1] === game[1][1] && sign[1] === game[2][2]) {
             console.log("o won");
             stopClick();
+            value = true;
 
         }
         if(sign[1] === game[0][2] && sign[1] === game[1][1] && sign[1]=== game[2][0]) {
             console.log("o won");
             stopClick();
+            value = true;
             
 
             
 
 
         }
+
+        // return {value};
+
+        
         
         // for(const sign of signs) {
         //     /* Horizontal */
@@ -249,6 +272,8 @@ const gameflow = (() => {
                     let two = parseInt(strings.charAt(1));
                     addSymbol(one, two, cell.innerHTML);
                     getWinner(players.one, players.two);
+                    checkTie();
+                    
 
                     // console.log(game);
                     // game.push(cell.innerHTML);
@@ -291,6 +316,28 @@ const gameflow = (() => {
             // })
         })
     }
+
+    const checkTie = () => {
+        // let winner = getWinner(players.one, players.two);
+        // let value = winner.value;
+        let one = game[0].every(checkArray);
+        let two = game[1].every(checkArray);
+        let three = game[2].every(checkArray);
+        if(one === true && two === true && three === true && value !== true){
+            console.log('tie game');
+        }
+        // game.forEach(g => {
+        //     if(g.every(checkArray) === true) {
+        //         console.log('tie game');
+        //     }
+        // })
+
+        function checkArray(element) {
+            return element !== "";
+
+        }
+    }
+    
 
     return {choosePlayer, addSymbol, game, divs};
     

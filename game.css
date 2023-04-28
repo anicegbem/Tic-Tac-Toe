@@ -11,7 +11,7 @@ body {
      
 }
 
-.container {
+.container-inner {
     display: grid;
     grid-template-columns: repeat(3, 150px); 
     margin: 0 auto;
@@ -25,11 +25,20 @@ body {
     
 }
 
+.container-outer {
+    margin: 0 auto;
+    width: 750px;
+}
+
 .cells {
     border: 1px solid #000;
     width: 150px;
     height: 150px;
     /* border-right: 1px solid #000; */
+}
+
+.players, .player-names, .container-inner {
+    display: none;
 }
 
 /* .cell-1 {

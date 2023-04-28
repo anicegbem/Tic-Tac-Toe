@@ -1,17 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="game.js" defer></script>
-    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="game.css" />
     <title>Document</title>
-</head>
-<body>
-    <button type="button" id="one">Player One</button>
-    <button type="button" id="two">Player Two</button>
-    <div class="container">
+  </head>
+  <body>
+    <!-- <button type="button" id="one">Player One</button>
+    <button type="button" id="two">Player Two</button> -->
+    <div class="container-outer">
+      <div id="popup"></div>
+      <div class="main-menu">
+        <button type="button" id="single">Single Player</button>
+        <button type="button" id="multi">Multi Player</button>
+      </div>
+
+      <div class="players">
+        <button type="button" id="one">Player One</button>
+        <button type="button" id="two">Player Two</button>
+        <!-- <button type="button" id="back">Back</button> -->
+        <button type="button" id="continue">Continue</button>
+      </div>
+
+      <div class="player-names">
+        <span>Enter Names:</span>
+        <input type="text" placeholder="Player X" required id="player-name-x" />
+        <input type="text" placeholder="Player O" required id="player-name-o" />
+        <button type="button" id="start">Start</button>
+      </div>
+      <div class="container-inner">
+        <!-- <div class="main-menu">
+            </div> -->
         <div class="cell-1 cells" id="00"></div>
         <div class="cell-2 cells" id="01"></div>
         <div class="cell-3 cells" id="02"></div>
@@ -21,7 +43,7 @@
         <div class="cell-7 cells" id="20"></div>
         <div class="cell-8 cells" id="21"></div>
         <div class="cell-9 cells" id="22"></div>
+      </div>
     </div>
-    
-</body>
+  </body>
 </html>

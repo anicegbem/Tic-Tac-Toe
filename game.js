@@ -5,11 +5,13 @@ const GameBoard = (() => {
 })();
 
 const players = (() => {
-    const player1 = {name: "PlayerOne", sign: "x"};
-    const player2 = {name: "PlayerTwo", sign: "o" };
+    const player1 = {name: '', sign: "x"};
+    const player2 = {name: '', sign: "o" };
     let one = player1.sign;
     let two = player2.sign;
-    return {one, two};
+    let nameX = player1.name;
+    let nameO = player2.name
+    return {one, two, player1, player2, nameX, nameO};
    
 })();
 
@@ -31,6 +33,7 @@ const gameflow = (() => {
     let rows = 3;
     let cols = 3;
     let value = '';
+    const nameX = document.getElementById('player-name-x');
 
     /* When UI is incorporated 'sign' will be replaced with if statements for each 
     player; playerX and playerY */ 
@@ -40,39 +43,51 @@ const gameflow = (() => {
         }
     }
 
-    const getHorizontal = (sign) => {
-        if(sign[0] === game[0][0] && game[0][1] && game[0][2]) {
-            console.log(`${sign[0]} won`)
+    const enterName = () => {
+        let one = document.getElementById('one');
+        let two = document.getElementById('two');
+        players.player1.name = one.value;
+        players.player2.name = two.value;
+        console.log(one.value);
 
-        } 
-        // else if (sign[1] === game[0][0] && game[0][1] && game[0][2]) {
-        //     console.log("You won");
-        // }
-        // if(sign[0] === game[1][0] && game[1][1] && game[1][2]) {
-        //     console.log("You won")
-
-        // } else if (sign[1] === game[1][0] && game[1][1] && game[1][2]) {
-        //     console.log("You won");
-
-        // }
-        // if(sign[0] === game[2][0] && game[2][1] && game[2][2]) {
-        //     console.log("You won")
-
-        // } else if (sign[1] === game[2][0] && game[2][1] && game[2][2]) {
-        //     console.log("You won");
-
-        // }
 
     }
 
+    // const getHorizontal = (sign) => {
+    //     if(sign[0] === game[0][0] && game[0][1] && game[0][2]) {
+    //         console.log(`${sign[0]} won`)
+
+    //     } 
+    //     // else if (sign[1] === game[0][0] && game[0][1] && game[0][2]) {
+    //     //     console.log("You won");
+    //     // }
+    //     // if(sign[0] === game[1][0] && game[1][1] && game[1][2]) {
+    //     //     console.log("You won")
+
+    //     // } else if (sign[1] === game[1][0] && game[1][1] && game[1][2]) {
+    //     //     console.log("You won");
+
+    //     // }
+    //     // if(sign[0] === game[2][0] && game[2][1] && game[2][2]) {
+    //     //     console.log("You won")
+
+    //     // } else if (sign[1] === game[2][0] && game[2][1] && game[2][2]) {
+    //     //     console.log("You won");
+
+    //     // }
+
+    // }
+
 
     const getWinner = (...sign) => {
+        let one = document.getElementById('one');
         // Horizontal
         // console.log(sign, sign[0], sign[1]);
         // console.log(game);
         // getHorizontal(players.one);
         if(sign[0] === game[0][0] && sign[0] === game[0][1] && sign[0] === game[0][2]) {
-            console.log(`${sign[0]} won`);
+            console.log(`${players.nameX} won`);
+            popup(players.nameX);
             stopClick();
             value = true;
             // array.forEach(cell => {
@@ -273,6 +288,8 @@ const gameflow = (() => {
                     addSymbol(one, two, cell.innerHTML);
                     getWinner(players.one, players.two);
                     checkTie();
+                    // enterName();
+                    
                     
 
                     // console.log(game);
@@ -298,10 +315,13 @@ const gameflow = (() => {
     const choosePlayer = () => {
         one.addEventListener('click', () => {
            placeMark(players.one);
+        //    enterName();
         })
         two.addEventListener('click', () => {
             placeMark(players.two);
-        })
+            // enterName();
+        });
+        
         
         
         
@@ -337,9 +357,121 @@ const gameflow = (() => {
 
         }
     }
+
+    // const goBack = (back, a, b, c) => {
+    //     back.addEventListener('click', function() {
+    //         a.style.display = "inline";
+    //         b.style.display = "inline";
+    //         array.forEach(player => {
+    //             player.style.display = "none";
+    //         })
+
+
+    //     })
+    //     // a.addEventListener('click', function () {
+    //     //     a.style.display = "none";
+    //     //     b.style.display = "none";
+    //     //     array.forEach(player => {
+    //     //         player.style.display = "block";
+    //     //     })
+
+    //     // })
+        
+        
+    // }
+
+    const displayPages = () => {
+        const multi = document.getElementById("multi");
+        const single = document.getElementById("single");
+        const gamers = document.getElementsByClassName('players');
+        const array = Array.from(gamers);
+        // const back = document.getElementById('back');
+        const one = document.getElementById('one');
+        const two = document.getElementById('two');
+        const cont = document.getElementById('continue');
+        const names = Array.from(document.getElementsByClassName('player-names'));
+        const start = document.getElementById('start');
+        // const nameX = document.getElementById('player-name-x');
+        const nameO = document.getElementById('player-name-o');
+        // const inner = Array.from(document.getElementsByClassName('cells'));
+        const inner = Array.from(document.getElementsByClassName('container-inner'));
+        multi.addEventListener('click', function () {
+            multi.style.display = "none";
+            single.style.display = "none";
+            array.forEach(player => {
+                player.style.display = "block";
+            });
+
+        })
+        single.addEventListener('click', function () {
+            multi.style.display = "none";
+            single.style.display = "none";
+            array.forEach(player => {
+                player.style.display = "block";
+            });
+
+        })
+        cont.addEventListener('click', function() {
+            if(board.length !== 0) {
+                array.forEach(player => {
+                    player.style.display = "none";
+                })
+                // back.style.display = "none";
+                cont.style.display = "none";
+                names.forEach(name => {
+                    name.style.display = "inline-block";
+                })
+
+            }
+            
+
+
+        });
+        
+        start.addEventListener('click', function() {
+            if(nameX.value !== '' && nameO.value !== '') {
+                players.nameX = `${nameX.value}`
+                players.nameO = nameO.value;
+                // console.log(players.nameX);
+                names.forEach(name => {
+                    name.style.display = "none";
+                })
+                // inner.style.display = "grid";
+                inner.forEach(item => {
+                    item.style.display = "grid";
+                })
+
+            }
+        });
+
+        // back.addEventListener('click', function() {
+        //     multi.style.display = "inline";
+        //     single.style.display = "inline";
+        //     array.forEach(player => {
+        //         player.style.display = "none";
+        //     })
+        //     game = [];
+
+
+        // });
+        
+    }
+
+    const popup = (player) => {
+        const popup = document.getElementById('popup');
+        popup.innerHTML = `${player} wins!`
+
+    }
+
+    displayPages();
+
     
 
-    return {choosePlayer, addSymbol, game, divs};
+    // enterName();
+    
+    
+
+    return {choosePlayer, addSymbol, game, divs, displayPages};
     
     
 

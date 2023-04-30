@@ -87,7 +87,7 @@ const gameflow = (() => {
         // getHorizontal(players.one);
         if(sign[0] === game[0][0] && sign[0] === game[0][1] && sign[0] === game[0][2]) {
             console.log(`${players.nameX} won`);
-            popup(players.nameX);
+            getPopup(players.nameX)
             stopClick();
             value = true;
             // array.forEach(cell => {
@@ -100,13 +100,15 @@ const gameflow = (() => {
 
         }
         if(sign[0] === game[1][0] && sign[0] === game[1][1] && sign[0] === game[1][2]) {
-            console.log(`${sign[0]} won`);
+            // console.log(`${sign[0]} won`);
+            getPopup(players.nameX)
             stopClick();
             value = true;
 
         }
         if(sign[0] === game[2][0] && sign[0] === game[2][1] && sign[0] === game[2][2]) {
-            console.log(`${sign[0]} won`);
+            // console.log(`${sign[0]} won`);
+            getPopup(players.nameX)
             stopClick();
             value = true;
 
@@ -114,20 +116,23 @@ const gameflow = (() => {
 
         // Player 2
         if(sign[1] === game[0][0] && sign[1] === game[0][1] && sign[1] === game[0][2]) {
-            console.log(`${sign[1]} won`);
+            // console.log(`${sign[1]} won`);
+            getPopup(players.nameO);;
             stopClick();
             value = true;
 
         }
         
         if(sign[1] === game[1][0] && sign[1] === game[1][1] && sign[1] === game[1][2]) {
-            console.log(`${sign[1]} won`);
+            // console.log(`${sign[1]} won`);
+            getPopup(players.nameO);
             stopClick();
             value = true;
 
         }
         if(sign[1] === game[2][0] && sign[1] === game[2][1] && sign[1] === game[2][2]) {
-            console.log(`${sign[1]} won`);
+            // console.log(`${sign[1]} won`);
+            getPopup(players.nameO);
             stopClick();
             value = true;
 
@@ -135,38 +140,44 @@ const gameflow = (() => {
 
         /* Vertical */
         if(sign[0] === game[0][0] && sign[0] === game[1][0] && sign[0] === game[2][0]) {
-            console.log("x won");
+            // console.log("x won");
+            getPopup(players.nameX);
             stopClick();
             value = true;
 
         }
         if(sign[0] === game[0][1] && sign[0] === game[1][1] && sign[0] === game[2][1]) {
-            console.log("x won");
+            // console.log("x won");
+            getPopup(players.nameX);
             stopClick();
             value = true;
 
         }
         if(sign[0] === game[0][2] && sign[0] === game[1][2] && sign[0] === game[2][2]) {
-            console.log("x won");
+            // console.log("x won");
+            getPopup(players.nameX);
             stopClick();
             value = true;
 
         }
         // Player 2
         if(sign[1] === game[0][0] && sign[1] === game[1][0] && sign[1] === game[2][0]) {
-            console.log("o won");
+            // console.log("o won");
+            getPopup(players.nameO);
             stopClick();
             value = true;
 
         }
         if(sign[1] === game[0][1] && sign[1] === game[1][1] && sign[1] === game[2][1]) {
-            console.log("o won");
+            // console.log("o won");
+            getPopup(players.nameO);
             stopClick();
             value = true;
 
         }
         if(sign[1] === game[0][2] && sign[1] === game[1][2] && sign[1] === game[2][2]) {
-            console.log("o won");
+            // console.log("o won");
+            getPopup(players.nameO);
             stopClick();
             value = true;
 
@@ -174,26 +185,30 @@ const gameflow = (() => {
 
         /* Diagonally */
         if(sign[0] === game[0][0] && sign[0] === game[1][1] && sign[0] === game[2][2]) {
-            console.log("x won");
+            // console.log("x won");
+            getPopup(players.nameX);
             stopClick();
             value = true;
 
         }
         if(sign[0] === game[0][2] && sign[0] === game[1][1] && sign[0] === game[2][0]) {
-            console.log("x won");
+            // console.log("x won");
+            getPopup(players.nameX);
             stopClick();
             value = true;
 
         }
         // Player 2
         if(sign[1] === game[0][0] && sign[1] === game[1][1] && sign[1] === game[2][2]) {
-            console.log("o won");
+            // console.log("o won");
+            getPopup(players.nameO);
             stopClick();
             value = true;
 
         }
         if(sign[1] === game[0][2] && sign[1] === game[1][1] && sign[1]=== game[2][0]) {
-            console.log("o won");
+            // console.log("o won");
+            getPopup(players.nameO);
             stopClick();
             value = true;
             
@@ -344,7 +359,7 @@ const gameflow = (() => {
         let two = game[1].every(checkArray);
         let three = game[2].every(checkArray);
         if(one === true && two === true && three === true && value !== true){
-            console.log('tie game');
+            document.getElementById('popup').innerHTML = "Tie Game!";
         }
         // game.forEach(g => {
         //     if(g.every(checkArray) === true) {
@@ -395,32 +410,67 @@ const gameflow = (() => {
         const nameO = document.getElementById('player-name-o');
         // const inner = Array.from(document.getElementsByClassName('cells'));
         const inner = Array.from(document.getElementsByClassName('container-inner'));
+        // const playerX = document.getElementById('')
+        // const singles = Array.
         multi.addEventListener('click', function () {
             multi.style.display = "none";
             single.style.display = "none";
-            array.forEach(player => {
-                player.style.display = "block";
-            });
+            one.style.display = "inline-block"; 
+            two.style.display = "inline-block";
+            cont.style.display = "inline-block";
+            // array.forEach(player => {
+            //     player.style.display = "block";
+            // });
 
         })
         single.addEventListener('click', function () {
             multi.style.display = "none";
             single.style.display = "none";
-            array.forEach(player => {
-                player.style.display = "block";
-            });
+            one.style.display = "inline-block"; 
+            two.style.display = "inline-block";
+            getSingle(cont, start, one, two, nameO, inner);
+            
+            // array.forEach(player => {
+            //     if(player.id !== 'continue') {
+            //         player.style.display = "block";
+
+            //     }
+            //     // player.style.display = "block";
+            // });
+            // getSingle(cont, singles, start)
 
         })
         cont.addEventListener('click', function() {
             if(board.length !== 0) {
-                array.forEach(player => {
-                    player.style.display = "none";
-                })
+                one.style.display = "none";
+                two.style.display = "none";
+                // array.forEach(player => {
+                //     player.style.display = "none";
+                // })
                 // back.style.display = "none";
                 cont.style.display = "none";
-                names.forEach(name => {
-                    name.style.display = "inline-block";
-                })
+                nameX.style.display = "inline-block";
+                nameO.style.display = "inline-block";
+                document.getElementById('prompt').style.display = "inline-block";
+                start.style.display = "inline-block";
+                start.addEventListener('click', function() {
+                    if(nameX.value !== '' && nameO.value !== '') {
+                        players.nameX = `${nameX.value}`
+                        players.nameO = nameO.value;
+                        // console.log(players.nameX);
+                        names.forEach(name => {
+                            name.style.display = "none";
+                        })
+                        // inner.style.display = "grid";
+                        inner.forEach(item => {
+                            item.style.display = "grid";
+                        })
+        
+                    }
+                });
+                // names.forEach(name => {
+                //     name.style.display = "inline-block";
+                // })
 
             }
             
@@ -428,21 +478,21 @@ const gameflow = (() => {
 
         });
         
-        start.addEventListener('click', function() {
-            if(nameX.value !== '' && nameO.value !== '') {
-                players.nameX = `${nameX.value}`
-                players.nameO = nameO.value;
-                // console.log(players.nameX);
-                names.forEach(name => {
-                    name.style.display = "none";
-                })
-                // inner.style.display = "grid";
-                inner.forEach(item => {
-                    item.style.display = "grid";
-                })
+        // start.addEventListener('click', function() {
+        //     if(nameX.value !== '' && nameO.value !== '') {
+        //         players.nameX = `${nameX.value}`
+        //         players.nameO = nameO.value;
+        //         // console.log(players.nameX);
+        //         names.forEach(name => {
+        //             name.style.display = "none";
+        //         })
+        //         // inner.style.display = "grid";
+        //         inner.forEach(item => {
+        //             item.style.display = "grid";
+        //         })
 
-            }
-        });
+        //     }
+        // });
 
         // back.addEventListener('click', function() {
         //     multi.style.display = "inline";
@@ -457,10 +507,64 @@ const gameflow = (() => {
         
     }
 
-    const popup = (player) => {
+    const getPopup = (player) => {
         const popup = document.getElementById('popup');
         popup.innerHTML = `${player} wins!`
 
+    }
+
+    const getSingle = (cont, start, one, two, nameO, inner) => {
+        cont.addEventListener('click', function() {
+            if(board.length !== 0) {
+                array.forEach(player => {
+                    player.style.display = "none";
+                })
+                // back.style.display = "none";
+                cont.style.display = "none";
+                // singles.forEach(name => {
+                //     name.style.display = "inline-block";
+                // })
+
+            }
+            
+
+
+        });
+
+        start.addEventListener('click', function() {
+            if(nameX.value !== '' || nameO.value !== '') {
+                players.nameX = `${nameX.value}`
+                players.nameO = nameO.value;
+                nameO.style.display = 'none';
+                nameX.style.display = 'none';
+                start.style.display = 'none';
+                // console.log(players.nameX);
+                // names.forEach(name => {
+                //     name.style.display = "none";
+                // })
+                // inner.style.display = "grid";
+                inner.forEach(item => {
+                    item.style.display = "grid";
+                })
+
+            }
+        });
+
+        one.addEventListener('click', function(){
+            nameX.style.display = "inline";
+            one.style.display = "none"; 
+            two.style.display = "none";
+            nameX.style.display = "inline-block";
+            start.style.display = "inline-block";
+        })
+
+        two.addEventListener('click', function(){
+            nameO.style.display = "inline";
+            one.style.display = "none"; 
+            two.style.display = "none";
+            nameO.style.display = "inline-block";
+            start.style.display = "inline-block";
+        })
     }
 
     displayPages();

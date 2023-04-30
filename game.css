@@ -37,7 +37,7 @@ body {
     /* border-right: 1px solid #000; */
 }
 
-.players, .player-names, .container-inner {
+#one, #two, #continue, #prompt, #player-name-x, #player-name-o, #start, .container-inner, .single-player {
     display: none;
 }
 

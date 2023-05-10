@@ -34,6 +34,7 @@ const gameflow = (() => {
     let cols = 3;
     let value = '';
     const nameX = document.getElementById('player-name-x');
+    const nameO = document.getElementById('player-name-o');
 
     /* When UI is incorporated 'sign' will be replaced with if statements for each 
     player; playerX and playerY */ 
@@ -48,7 +49,7 @@ const gameflow = (() => {
         let two = document.getElementById('two');
         players.player1.name = one.value;
         players.player2.name = two.value;
-        console.log(one.value);
+        
 
 
     }
@@ -273,6 +274,13 @@ const gameflow = (() => {
     
 
     const placeMark = (sign) => {
+        let counter = [];
+
+
+        // else if (nameX.value !== "" && nameO.value !== "") {
+            
+        // }
+
         if(sign === players.one) {
             let x = "x";
             let o = "o";
@@ -296,14 +304,71 @@ const gameflow = (() => {
         array.forEach(cell => {
             cell.addEventListener('click', function() {
                 if(cell.innerHTML === "") {
-                    cell.innerHTML = board[i++];
+                    if(nameX.value !== "" && nameO.value !== "") {
+                        cell.innerHTML = board[i++];
+                        // let strings = cell.id;
+                        // let one = parseInt(strings.charAt(0));
+                        // let two = parseInt(strings.charAt(1));
+                        // addSymbol(one, two, cell.innerHTML);
+                        // getWinner(players.one, players.two);
+                        // checkTie();
+
+                    }
+                    
+
+                    if(nameX.value === "" || nameO.value === "") {
+                        if(sign === players.one) {
+                            let items = ['x', 'o'];
+                            cell.innerHTML = items[0];
+                            let strings = cell.id;
+                            let one = parseInt(strings.charAt(0));
+                            let two = parseInt(strings.charAt(1));
+                            addSymbol(one, two, cell.innerHTML);
+                            getWinner(players.one, players.two);
+                            checkTie();
+                            enterName();
+                            
+                            playComputer(items[1]);
+
+                           
+                            
+                            // try using Math.random() to randomly add to cell
+
+
+                            // setTimeout(`${cell.innerHTML = items[i]}`, 1000);
+                            // console.log(items[1]);
+                            // array.forEach(cell => {
+                            //     cell.addEventListener('click', function(){
+                            //         cell.innerHTML = items[0];
+                            //         console.log(items[1]);
+                            //     })
+                            // })
+            
+                        }
+                        if(sign === players.two) {
+                            let items = ['o', 'x'];
+                            cell.innerHTML = items[0];
+                            let strings = cell.id;
+                            let one = parseInt(strings.charAt(0));
+                            let two = parseInt(strings.charAt(1));
+                            addSymbol(one, two, cell.innerHTML);
+                            getWinner(players.one, players.two);
+                            checkTie();
+                            enterName();
+                            playComputer(items[1]);
+                            // getWinner(players.one, players.two);
+                            // console.log(value);
+                            
+                        }
+                    }
+
                     let strings = cell.id;
                     let one = parseInt(strings.charAt(0));
                     let two = parseInt(strings.charAt(1));
                     addSymbol(one, two, cell.innerHTML);
                     getWinner(players.one, players.two);
                     checkTie();
-                    // enterName();
+                    enterName();
                     
                     
 
@@ -325,6 +390,66 @@ const gameflow = (() => {
         
         
 
+    }
+
+    const playComputer = (items) => {
+        // getWinner(players.one, players.two);
+        if(value !== true) {
+            for(let i = 0; i < array.length; i++) {
+                if(!array[i].textContent) {
+                    array[i]. textContent = items;
+                    break;
+                }
+            }
+
+        }
+        
+        
+        
+
+        // let counter = [];
+
+        // let arr_length = array.length;
+        // let value = Math.random() * arr_length;
+        // let index = Math.floor(value);
+
+        // counter.push(index);
+        // let element = array[index];
+        // console.log(counter);
+        // let element = "";
+
+        // let element = array[index];
+        // if(!counter.includes(index) && element.innerHTML === ""){
+        //     counter.push(index);
+        //     element.innerHTML = items[1];
+        //     // array.slice(index);
+        //     // console.log("array length: " + arr_length);
+        //     // if(element.innerHTML === "") {
+                
+        //     //     element.innerHTML = items[1];
+        //     //     // array.slice(index);
+        //     //     console.log("array length: " + arr_length);
+        //     //     console.log("beans");
+                
+                
+                
+        // }
+
+        // }
+        // // else if (element.innerHTML === "") {
+        // //     element.innerHTML = items[1];
+        // //     // let newvalue = Math.random() * arr_length;
+        // //     // let newindex = Math.floor(newvalue);
+        // //     // let newelement = array[newindex + 1];
+        // //     // console.log("new: " + newindex);
+        // //     // newelement.innerHTML = items[1];
+            
+        // // }
+       
+        // console.log(index);
+        // console.log("array length: " + arr_length);
+        // element.innerHTML = items[1];
+        
     }
 
     const choosePlayer = () => {

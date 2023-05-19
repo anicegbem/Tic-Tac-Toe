@@ -35,6 +35,95 @@ const gameflow = (() => {
     let value = '';
     const nameX = document.getElementById('player-name-x');
     const nameO = document.getElementById('player-name-o');
+    let origiBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+    // ai 
+    let aiPlayer = 'x';
+
+    // human
+    let huPlayer = 'o';
+
+    function getEmptyIndex(board) {
+        return board.filter(s => s !== "o" && s !== "x");
+    }
+
+    function getWinningCombination(board, player) {
+        if (
+            (board[0] === player && board[1] === player && board[2] === player) ||
+            (board[3] === player && board[4] === player && board[5] === player) ||
+            (board[6] === player && board[7] === player && board[8] === player) ||
+            (board[0] === player && board[3] === player && board[6] === player) ||
+            (board[1] === player && board[4] === player && board[7] === player) ||
+            (board[2] === player && board[5] === player && board[8] === player) ||
+            (board[0] === player && board[4] === player && board[8] === player) ||
+            (board[2] === player && board[4] === player && board[6] === player)
+
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function minimax(newBoard, player) {
+        // available spots
+        let availSpots = getEmptyIndex(newBoard);
+
+        if(getWinningCombination(newBoard, huPlayer)) {
+            return {score: -10};
+        } else if(getWinningCombination(newBoard, aiPlayer)) {
+            return {score: 10};
+        } else if(availSpots.length === 0) {
+            return {score: 0};
+        }
+
+        let moves = [];
+
+        for(let i = 0; i < availSpots.length; i++) {
+            let move = {};
+            move.index = newBoard[availSpots[i]];
+            
+            // set the empty spot to the current player
+            newBoard[availSpots[i]] = player;
+
+            /*collect the score resulted from calling minimax on the current player's opponent */
+            if(player === aiPlayer) {
+                let result = minimax(newBoard, huPlayer);
+                move.score = result.score;
+            }
+            else {
+                let result = minimax(newBoard, aiPlayer);
+                move.score = result.score;
+            }
+
+            // reset the spot to empty
+            newBoard[availSpots[i]] = move.index;
+
+            // push the object to the array
+            moves.push(move);
+        }
+
+        let bestMove;
+        if(player === aiPlayer) {
+            let bestScore = -10000;
+            for(let i = 0; i < moves.length; i++) {
+                if(moves[i].score > bestScore) {
+                    bestScore =  moves[i].score;
+                    bestMove = i;
+                }
+            }
+        } else {
+            let bestScore = 10000;
+            for(let i = 0; i < moves.length; i++) {
+                if(moves[i].score < bestScore) {
+                    bestScore = moves[i].score;
+                    bestMove = i;
+                }
+            }
+        }
+        
+        return moves[bestMove];
+    }
 
     /* When UI is incorporated 'sign' will be replaced with if statements for each 
     player; playerX and playerY */ 
@@ -319,7 +408,20 @@ const gameflow = (() => {
                     if(nameX.value === "" || nameO.value === "") {
                         if(sign === players.one) {
                             let items = ['x', 'o'];
-                            cell.innerHTML = items[0];
+                            let empty;
+                            cell.innerHTML = items[1];
+                            updateOrigi();
+                            playComputer('x');
+                            console.log(getEmptyIndex(origiBoard))
+                            // for(let i = 0; i < array.length; i++) {
+                            //     if(array[i].innerHTML === "x") {
+                            //         let index 
+                                    
+
+                            //     }
+                            //     break
+                            // }
+                            
                             let strings = cell.id;
                             let one = parseInt(strings.charAt(0));
                             let two = parseInt(strings.charAt(1));
@@ -328,7 +430,18 @@ const gameflow = (() => {
                             checkTie();
                             enterName();
                             
-                            playComputer(items[1]);
+                            // playComputer(players.one);
+                            // playComputer2(items[1])
+                            
+                            // if(cell.textContent !== "") {
+                            //     console.log(cell.getAttribute('data-index'))
+                            //     origiBoard.forEach(item => {
+                            //         if(cell.getAttribute('data-index') === item) {
+                            //             origiBoard.splice(item, 0, cell.textContent);
+                            //         }
+                            //     })
+
+                            // }
 
                            
                             
@@ -355,7 +468,8 @@ const gameflow = (() => {
                             getWinner(players.one, players.two);
                             checkTie();
                             enterName();
-                            playComputer(items[1]);
+                            // playComputer(players.two);
+                            // playComputer2(items[1]);
                             // getWinner(players.one, players.two);
                             // console.log(value);
                             
@@ -392,7 +506,32 @@ const gameflow = (() => {
 
     }
 
-    const playComputer = (items) => {
+    const playComputer = (aiPlayer) => {
+        let mini = minimax(origiBoard, aiPlayer).index;
+        let moves = minimax(origiBoard, aiPlayer);
+        for(let i = 0; i <= array.length; i++) {
+            if(array[i].textContent === "" && value !== true) {
+                console.log(mini);
+                console.log(moves);
+                array[mini].textContent = aiPlayer;
+                break;
+            }
+            
+        }
+        if(minimax(origiBoard, aiPlayer).score === 10) {
+            stopClick();
+        }
+        // getWinner(players.one, players.two);
+        // if(value !== true) {
+            
+
+        // }
+        
+        
+        
+
+    }
+    const playComputer2 = (items) => {
         // getWinner(players.one, players.two);
         if(value !== true) {
             for(let i = 0; i < array.length; i++) {
@@ -406,51 +545,28 @@ const gameflow = (() => {
         
         
         
+    }
 
-        // let counter = [];
+    const updateOrigi = () => {
 
-        // let arr_length = array.length;
-        // let value = Math.random() * arr_length;
-        // let index = Math.floor(value);
+        for(let i = 0; i < Math.min(array.length, origiBoard.length); i++){
+            if(origiBoard[i] === array.indexOf(array[i]) && array[i].innerHTML !== ""){
+                origiBoard[i] = array[i].innerHTML;
+                if(array[i].innerHTML === "") {
+                    break
 
-        // counter.push(index);
-        // let element = array[index];
-        // console.log(counter);
-        // let element = "";
+                }
+               
 
-        // let element = array[index];
-        // if(!counter.includes(index) && element.innerHTML === ""){
-        //     counter.push(index);
-        //     element.innerHTML = items[1];
-        //     // array.slice(index);
-        //     // console.log("array length: " + arr_length);
-        //     // if(element.innerHTML === "") {
-                
-        //     //     element.innerHTML = items[1];
-        //     //     // array.slice(index);
-        //     //     console.log("array length: " + arr_length);
-        //     //     console.log("beans");
-                
-                
-                
-        // }
-
-        // }
-        // // else if (element.innerHTML === "") {
-        // //     element.innerHTML = items[1];
-        // //     // let newvalue = Math.random() * arr_length;
-        // //     // let newindex = Math.floor(newvalue);
-        // //     // let newelement = array[newindex + 1];
-        // //     // console.log("new: " + newindex);
-        // //     // newelement.innerHTML = items[1];
+            }
             
-        // // }
-       
-        // console.log(index);
-        // console.log("array length: " + arr_length);
-        // element.innerHTML = items[1];
+            
+        }
+        console.log(origiBoard);
+        
         
     }
+    
 
     const choosePlayer = () => {
         one.addEventListener('click', () => {
@@ -691,8 +807,17 @@ const gameflow = (() => {
             start.style.display = "inline-block";
         })
     }
+    
+    // let origiBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    
+
+    // let newBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    // minimax(newBoard, huPlayer);
 
     displayPages();
+    
+    // updateOrigi();
 
     
 

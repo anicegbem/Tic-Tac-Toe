@@ -38,10 +38,10 @@ const gameflow = (() => {
     let origiBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
     // ai 
-    let aiPlayer = 'x';
+    let aiPlayer = 'o';
 
     // human
-    let huPlayer = 'o';
+    let huPlayer = 'x';
 
     function getEmptyIndex(board) {
         return board.filter(s => s !== "o" && s !== "x");
@@ -409,9 +409,9 @@ const gameflow = (() => {
                         if(sign === players.one) {
                             let items = ['x', 'o'];
                             let empty;
-                            cell.innerHTML = items[1];
+                            cell.innerHTML = items[0];
                             updateOrigi();
-                            playComputer('x');
+                            playComputer('o');
                             console.log(getEmptyIndex(origiBoard))
                             // for(let i = 0; i < array.length; i++) {
                             //     if(array[i].innerHTML === "x") {
@@ -507,6 +507,7 @@ const gameflow = (() => {
     }
 
     const playComputer = (aiPlayer) => {
+        let empty = getEmptyIndex(origiBoard);
         let mini = minimax(origiBoard, aiPlayer).index;
         let moves = minimax(origiBoard, aiPlayer);
         for(let i = 0; i <= array.length; i++) {
@@ -517,10 +518,24 @@ const gameflow = (() => {
                 break;
             }
             
+            // else if(array[i].textContent !== "") {
+            //     break
+            // }
+            
         }
         if(minimax(origiBoard, aiPlayer).score === 10) {
             stopClick();
+            document.getElementById('popup').innerHTML = "You Lose!";
         }
+        // else if(minimax(origiBoard, aiPlayer) === -10) {
+        //     getPopup(players.nameX);
+        // }
+        if (minimax(origiBoard, aiPlayer).score === 0 && empty.length < 3) {
+            stopClick();
+            document.getElementById('popup').innerHTML = "Tie Game!"
+        }
+        console.log("score: " + minimax(origiBoard, aiPlayer).score);
+        console.log("length: " + empty.length);
         // getWinner(players.one, players.two);
         // if(value !== true) {
             

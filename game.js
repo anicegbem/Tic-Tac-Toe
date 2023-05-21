@@ -37,93 +37,93 @@ const gameflow = (() => {
     const nameO = document.getElementById('player-name-o');
     let origiBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
-    // ai 
-    let aiPlayer = 'o';
+    // // ai 
+    // let aiPlayer = 'o';
 
-    // human
-    let huPlayer = 'x';
+    // // human
+    // let huPlayer = 'x';
 
-    function getEmptyIndex(board) {
-        return board.filter(s => s !== "o" && s !== "x");
-    }
+    // function getEmptyIndex(board) {
+    //     return board.filter(s => s !== "o" && s !== "x");
+    // }
 
-    function getWinningCombination(board, player) {
-        if (
-            (board[0] === player && board[1] === player && board[2] === player) ||
-            (board[3] === player && board[4] === player && board[5] === player) ||
-            (board[6] === player && board[7] === player && board[8] === player) ||
-            (board[0] === player && board[3] === player && board[6] === player) ||
-            (board[1] === player && board[4] === player && board[7] === player) ||
-            (board[2] === player && board[5] === player && board[8] === player) ||
-            (board[0] === player && board[4] === player && board[8] === player) ||
-            (board[2] === player && board[4] === player && board[6] === player)
+    // function getWinningCombination(board, player) {
+    //     if (
+    //         (board[0] === player && board[1] === player && board[2] === player) ||
+    //         (board[3] === player && board[4] === player && board[5] === player) ||
+    //         (board[6] === player && board[7] === player && board[8] === player) ||
+    //         (board[0] === player && board[3] === player && board[6] === player) ||
+    //         (board[1] === player && board[4] === player && board[7] === player) ||
+    //         (board[2] === player && board[5] === player && board[8] === player) ||
+    //         (board[0] === player && board[4] === player && board[8] === player) ||
+    //         (board[2] === player && board[4] === player && board[6] === player)
 
-        ) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    //     ) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
-    function minimax(newBoard, player) {
-        // available spots
-        let availSpots = getEmptyIndex(newBoard);
+    // function minimax(newBoard, player) {
+    //     // available spots
+    //     let availSpots = getEmptyIndex(newBoard);
 
-        if(getWinningCombination(newBoard, huPlayer)) {
-            return {score: -10};
-        } else if(getWinningCombination(newBoard, aiPlayer)) {
-            return {score: 10};
-        } else if(availSpots.length === 0) {
-            return {score: 0};
-        }
+    //     if(getWinningCombination(newBoard, huPlayer)) {
+    //         return {score: -10};
+    //     } else if(getWinningCombination(newBoard, aiPlayer)) {
+    //         return {score: 10};
+    //     } else if(availSpots.length === 0) {
+    //         return {score: 0};
+    //     }
 
-        let moves = [];
+    //     let moves = [];
 
-        for(let i = 0; i < availSpots.length; i++) {
-            let move = {};
-            move.index = newBoard[availSpots[i]];
+    //     for(let i = 0; i < availSpots.length; i++) {
+    //         let move = {};
+    //         move.index = newBoard[availSpots[i]];
             
-            // set the empty spot to the current player
-            newBoard[availSpots[i]] = player;
+    //         // set the empty spot to the current player
+    //         newBoard[availSpots[i]] = player;
 
-            /*collect the score resulted from calling minimax on the current player's opponent */
-            if(player === aiPlayer) {
-                let result = minimax(newBoard, huPlayer);
-                move.score = result.score;
-            }
-            else {
-                let result = minimax(newBoard, aiPlayer);
-                move.score = result.score;
-            }
+    //         /*collect the score resulted from calling minimax on the current player's opponent */
+    //         if(player === aiPlayer) {
+    //             let result = minimax(newBoard, huPlayer);
+    //             move.score = result.score;
+    //         }
+    //         else {
+    //             let result = minimax(newBoard, aiPlayer);
+    //             move.score = result.score;
+    //         }
 
-            // reset the spot to empty
-            newBoard[availSpots[i]] = move.index;
+    //         // reset the spot to empty
+    //         newBoard[availSpots[i]] = move.index;
 
-            // push the object to the array
-            moves.push(move);
-        }
+    //         // push the object to the array
+    //         moves.push(move);
+    //     }
 
-        let bestMove;
-        if(player === aiPlayer) {
-            let bestScore = -10000;
-            for(let i = 0; i < moves.length; i++) {
-                if(moves[i].score > bestScore) {
-                    bestScore =  moves[i].score;
-                    bestMove = i;
-                }
-            }
-        } else {
-            let bestScore = 10000;
-            for(let i = 0; i < moves.length; i++) {
-                if(moves[i].score < bestScore) {
-                    bestScore = moves[i].score;
-                    bestMove = i;
-                }
-            }
-        }
+    //     let bestMove;
+    //     if(player === aiPlayer) {
+    //         let bestScore = -10000;
+    //         for(let i = 0; i < moves.length; i++) {
+    //             if(moves[i].score > bestScore) {
+    //                 bestScore =  moves[i].score;
+    //                 bestMove = i;
+    //             }
+    //         }
+    //     } else {
+    //         let bestScore = 10000;
+    //         for(let i = 0; i < moves.length; i++) {
+    //             if(moves[i].score < bestScore) {
+    //                 bestScore = moves[i].score;
+    //                 bestMove = i;
+    //             }
+    //         }
+    //     }
         
-        return moves[bestMove];
-    }
+    //     return moves[bestMove];
+    // }
 
     /* When UI is incorporated 'sign' will be replaced with if statements for each 
     player; playerX and playerY */ 
@@ -360,6 +360,12 @@ const gameflow = (() => {
 
 
     }
+
+    let aiPlayer = 'o';
+
+    let huPlayer = 'x';
+
+    
     
 
     const placeMark = (sign) => {
@@ -395,13 +401,6 @@ const gameflow = (() => {
                 if(cell.innerHTML === "") {
                     if(nameX.value !== "" && nameO.value !== "") {
                         cell.innerHTML = board[i++];
-                        // let strings = cell.id;
-                        // let one = parseInt(strings.charAt(0));
-                        // let two = parseInt(strings.charAt(1));
-                        // addSymbol(one, two, cell.innerHTML);
-                        // getWinner(players.one, players.two);
-                        // checkTie();
-
                     }
                     
 
@@ -412,7 +411,7 @@ const gameflow = (() => {
                             cell.innerHTML = items[0];
                             updateOrigi();
                             playComputer('o');
-                            console.log(getEmptyIndex(origiBoard))
+                            // console.log(getEmptyIndex(origiBoard))
                             // for(let i = 0; i < array.length; i++) {
                             //     if(array[i].innerHTML === "x") {
                             //         let index 
@@ -459,8 +458,12 @@ const gameflow = (() => {
             
                         }
                         if(sign === players.two) {
+                            huPlayer = 'o';
+                            aiPlayer = 'x'
                             let items = ['o', 'x'];
                             cell.innerHTML = items[0];
+                            updateOrigi();
+                            playComputer('x');
                             let strings = cell.id;
                             let one = parseInt(strings.charAt(0));
                             let two = parseInt(strings.charAt(1));
@@ -506,6 +509,94 @@ const gameflow = (() => {
 
     }
 
+    // ai 
+    // let aiPlayer = 'o';
+
+    // human
+    // let huPlayer = 'x';
+
+    function getEmptyIndex(board) {
+        return board.filter(s => s !== "o" && s !== "x");
+    }
+
+    function getWinningCombination(board, player) {
+        if (
+            (board[0] === player && board[1] === player && board[2] === player) ||
+            (board[3] === player && board[4] === player && board[5] === player) ||
+            (board[6] === player && board[7] === player && board[8] === player) ||
+            (board[0] === player && board[3] === player && board[6] === player) ||
+            (board[1] === player && board[4] === player && board[7] === player) ||
+            (board[2] === player && board[5] === player && board[8] === player) ||
+            (board[0] === player && board[4] === player && board[8] === player) ||
+            (board[2] === player && board[4] === player && board[6] === player)
+
+        ) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function minimax(newBoard, player) {
+        // available spots
+        let availSpots = getEmptyIndex(newBoard);
+
+        if(getWinningCombination(newBoard, huPlayer)) {
+            return {score: -10};
+        } else if(getWinningCombination(newBoard, aiPlayer)) {
+            return {score: 10};
+        } else if(availSpots.length === 0) {
+            return {score: 0};
+        }
+
+        let moves = [];
+
+        for(let i = 0; i < availSpots.length; i++) {
+            let move = {};
+            move.index = newBoard[availSpots[i]];
+            
+            // set the empty spot to the current player
+            newBoard[availSpots[i]] = player;
+
+            /*collect the score resulted from calling minimax on the current player's opponent */
+            if(player === aiPlayer) {
+                let result = minimax(newBoard, huPlayer);
+                move.score = result.score;
+            }
+            else {
+                let result = minimax(newBoard, aiPlayer);
+                move.score = result.score;
+            }
+
+            // reset the spot to empty
+            newBoard[availSpots[i]] = move.index;
+
+            // push the object to the array
+            moves.push(move);
+        }
+
+        let bestMove;
+        if(player === aiPlayer) {
+            let bestScore = -10000;
+            for(let i = 0; i < moves.length; i++) {
+                if(moves[i].score > bestScore) {
+                    bestScore =  moves[i].score;
+                    bestMove = i;
+                }
+            }
+        } else {
+            let bestScore = 10000;
+            for(let i = 0; i < moves.length; i++) {
+                if(moves[i].score < bestScore) {
+                    bestScore = moves[i].score;
+                    bestMove = i;
+                }
+            }
+        }
+        
+        return moves[bestMove];
+    }
+
     const playComputer = (aiPlayer) => {
         let empty = getEmptyIndex(origiBoard);
         let mini = minimax(origiBoard, aiPlayer).index;
@@ -526,6 +617,7 @@ const gameflow = (() => {
         if(minimax(origiBoard, aiPlayer).score === 10) {
             stopClick();
             document.getElementById('popup').innerHTML = "You Lose!";
+            toggleModal();
         }
         // else if(minimax(origiBoard, aiPlayer) === -10) {
         //     getPopup(players.nameX);
@@ -534,8 +626,8 @@ const gameflow = (() => {
             stopClick();
             document.getElementById('popup').innerHTML = "Tie Game!"
         }
-        console.log("score: " + minimax(origiBoard, aiPlayer).score);
-        console.log("length: " + empty.length);
+        // console.log("score: " + minimax(origiBoard, aiPlayer).score);
+        // console.log("length: " + empty.length);
         // getWinner(players.one, players.two);
         // if(value !== true) {
             
@@ -577,7 +669,7 @@ const gameflow = (() => {
             
             
         }
-        console.log(origiBoard);
+        // console.log(origiBoard);
         
         
     }
@@ -821,6 +913,14 @@ const gameflow = (() => {
             nameO.style.display = "inline-block";
             start.style.display = "inline-block";
         })
+    }
+
+    const toggleModal = () => {
+        const containerOuter = document.querySelector('.container-outer');
+        const modalWrapper = document.querySelector('.modal-wrapper');
+        const modalButton = document.querySelector('.modal-toggle');
+        modalWrapper.style.display = "flex";
+
     }
     
     // let origiBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];

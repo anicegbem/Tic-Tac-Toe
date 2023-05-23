@@ -17,6 +17,7 @@ const players = (() => {
 
 
 const gameflow = (() => {
+    let newBoard = [];
     let board = GameBoard.gameboard;
     let one = document.getElementById('one')
     let two = document.getElementById('two');
@@ -36,6 +37,7 @@ const gameflow = (() => {
     const nameX = document.getElementById('player-name-x');
     const nameO = document.getElementById('player-name-o');
     let origiBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    let chosenPlayer = '';
 
     // // ai 
     // let aiPlayer = 'o';
@@ -127,6 +129,15 @@ const gameflow = (() => {
 
     /* When UI is incorporated 'sign' will be replaced with if statements for each 
     player; playerX and playerY */ 
+
+    // const resetBoard = () => {
+    //     board = [];
+
+    // }
+    const resetBoardO = () => {
+        board = [];
+
+    }
     const addSymbol = (row, col, sign) => {
         if(game[row][col] === '') {
             game[row][col] = sign;
@@ -143,31 +154,6 @@ const gameflow = (() => {
 
     }
 
-    // const getHorizontal = (sign) => {
-    //     if(sign[0] === game[0][0] && game[0][1] && game[0][2]) {
-    //         console.log(`${sign[0]} won`)
-
-    //     } 
-    //     // else if (sign[1] === game[0][0] && game[0][1] && game[0][2]) {
-    //     //     console.log("You won");
-    //     // }
-    //     // if(sign[0] === game[1][0] && game[1][1] && game[1][2]) {
-    //     //     console.log("You won")
-
-    //     // } else if (sign[1] === game[1][0] && game[1][1] && game[1][2]) {
-    //     //     console.log("You won");
-
-    //     // }
-    //     // if(sign[0] === game[2][0] && game[2][1] && game[2][2]) {
-    //     //     console.log("You won")
-
-    //     // } else if (sign[1] === game[2][0] && game[2][1] && game[2][2]) {
-    //     //     console.log("You won");
-
-    //     // }
-
-    // }
-
 
     const getWinner = (...sign) => {
         let one = document.getElementById('one');
@@ -176,10 +162,11 @@ const gameflow = (() => {
         // console.log(game);
         // getHorizontal(players.one);
         if(sign[0] === game[0][0] && sign[0] === game[0][1] && sign[0] === game[0][2]) {
-            console.log(`${players.nameX} won`);
             getPopup(players.nameX)
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
             // array.forEach(cell => {
             //     cell.addEventListener('click', function(event){
             //         event.preventDefault();
@@ -193,14 +180,18 @@ const gameflow = (() => {
             // console.log(`${sign[0]} won`);
             getPopup(players.nameX)
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
         if(sign[0] === game[2][0] && sign[0] === game[2][1] && sign[0] === game[2][2]) {
             // console.log(`${sign[0]} won`);
             getPopup(players.nameX)
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
 
@@ -209,7 +200,9 @@ const gameflow = (() => {
             // console.log(`${sign[1]} won`);
             getPopup(players.nameO);;
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
         
@@ -217,14 +210,18 @@ const gameflow = (() => {
             // console.log(`${sign[1]} won`);
             getPopup(players.nameO);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
         if(sign[1] === game[2][0] && sign[1] === game[2][1] && sign[1] === game[2][2]) {
             // console.log(`${sign[1]} won`);
             getPopup(players.nameO);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
 
@@ -233,21 +230,27 @@ const gameflow = (() => {
             // console.log("x won");
             getPopup(players.nameX);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
         if(sign[0] === game[0][1] && sign[0] === game[1][1] && sign[0] === game[2][1]) {
             // console.log("x won");
             getPopup(players.nameX);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
         if(sign[0] === game[0][2] && sign[0] === game[1][2] && sign[0] === game[2][2]) {
             // console.log("x won");
             getPopup(players.nameX);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
         // Player 2
@@ -255,21 +258,27 @@ const gameflow = (() => {
             // console.log("o won");
             getPopup(players.nameO);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
         if(sign[1] === game[0][1] && sign[1] === game[1][1] && sign[1] === game[2][1]) {
             // console.log("o won");
             getPopup(players.nameO);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
         if(sign[1] === game[0][2] && sign[1] === game[1][2] && sign[1] === game[2][2]) {
             // console.log("o won");
             getPopup(players.nameO);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
 
@@ -278,14 +287,18 @@ const gameflow = (() => {
             // console.log("x won");
             getPopup(players.nameX);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
         if(sign[0] === game[0][2] && sign[0] === game[1][1] && sign[0] === game[2][0]) {
             // console.log("x won");
             getPopup(players.nameX);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
         // Player 2
@@ -293,14 +306,18 @@ const gameflow = (() => {
             // console.log("o won");
             getPopup(players.nameO);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
 
         }
         if(sign[1] === game[0][2] && sign[1] === game[1][1] && sign[1]=== game[2][0]) {
             // console.log("o won");
             getPopup(players.nameO);
             stopClick();
+            toggleModal();
             value = true;
+            // resetBoard();
             
 
             
@@ -370,6 +387,7 @@ const gameflow = (() => {
 
     const placeMark = (sign) => {
         let counter = [];
+        let i = 0;
 
 
         // else if (nameX.value !== "" && nameO.value !== "") {
@@ -380,6 +398,7 @@ const gameflow = (() => {
             let x = "x";
             let o = "o";
             let values = [x, o];
+           
             
             while(board.length < 9) {
                 board.push(values[board.length % 2]);
@@ -389,6 +408,7 @@ const gameflow = (() => {
             let x = "x";
             let o = "o";
             let values = [o, x];
+            
             
             while(board.length < 9) {
                 board.push(values[board.length % 2]);
@@ -401,6 +421,13 @@ const gameflow = (() => {
                 if(cell.innerHTML === "") {
                     if(nameX.value !== "" && nameO.value !== "") {
                         cell.innerHTML = board[i++];
+                        let strings = cell.id;
+                        let one = parseInt(strings.charAt(0));
+                        let two = parseInt(strings.charAt(1));
+                        addSymbol(one, two, cell.innerHTML);
+                        getWinner(players.one, players.two);
+                        checkTie();
+                        enterName();
                     }
                     
 
@@ -424,37 +451,9 @@ const gameflow = (() => {
                             let strings = cell.id;
                             let one = parseInt(strings.charAt(0));
                             let two = parseInt(strings.charAt(1));
-                            addSymbol(one, two, cell.innerHTML);
                             getWinner(players.one, players.two);
                             checkTie();
                             enterName();
-                            
-                            // playComputer(players.one);
-                            // playComputer2(items[1])
-                            
-                            // if(cell.textContent !== "") {
-                            //     console.log(cell.getAttribute('data-index'))
-                            //     origiBoard.forEach(item => {
-                            //         if(cell.getAttribute('data-index') === item) {
-                            //             origiBoard.splice(item, 0, cell.textContent);
-                            //         }
-                            //     })
-
-                            // }
-
-                           
-                            
-                            // try using Math.random() to randomly add to cell
-
-
-                            // setTimeout(`${cell.innerHTML = items[i]}`, 1000);
-                            // console.log(items[1]);
-                            // array.forEach(cell => {
-                            //     cell.addEventListener('click', function(){
-                            //         cell.innerHTML = items[0];
-                            //         console.log(items[1]);
-                            //     })
-                            // })
             
                         }
                         if(sign === players.two) {
@@ -467,31 +466,13 @@ const gameflow = (() => {
                             let strings = cell.id;
                             let one = parseInt(strings.charAt(0));
                             let two = parseInt(strings.charAt(1));
-                            addSymbol(one, two, cell.innerHTML);
+                            // addSymbol(one, two, cell.innerHTML);
                             getWinner(players.one, players.two);
                             checkTie();
                             enterName();
-                            // playComputer(players.two);
-                            // playComputer2(items[1]);
-                            // getWinner(players.one, players.two);
-                            // console.log(value);
                             
                         }
                     }
-
-                    let strings = cell.id;
-                    let one = parseInt(strings.charAt(0));
-                    let two = parseInt(strings.charAt(1));
-                    addSymbol(one, two, cell.innerHTML);
-                    getWinner(players.one, players.two);
-                    checkTie();
-                    enterName();
-                    
-                    
-
-                    // console.log(game);
-                    // game.push(cell.innerHTML);
-                    // console.log(strings, one, two);
                     
                     
                     
@@ -624,7 +605,8 @@ const gameflow = (() => {
         // }
         if (minimax(origiBoard, aiPlayer).score === 0 && empty.length < 3) {
             stopClick();
-            document.getElementById('popup').innerHTML = "Tie Game!"
+            document.getElementById('popup').innerHTML = "Tie Game!";
+            toggleModal();
         }
         // console.log("score: " + minimax(origiBoard, aiPlayer).score);
         // console.log("length: " + empty.length);
@@ -678,10 +660,18 @@ const gameflow = (() => {
     const choosePlayer = () => {
         one.addEventListener('click', () => {
            placeMark(players.one);
+           chosenPlayer = "x";
+        //    replayGame();
+           
+        //    console.log(chosenPlayer);
         //    enterName();
         })
         two.addEventListener('click', () => {
+            // replayGame()
             placeMark(players.two);
+            chosenPlayer = "o";
+            
+            // console.log(chosenPlayer);
             // enterName();
         });
         
@@ -922,6 +912,64 @@ const gameflow = (() => {
         modalWrapper.style.display = "flex";
 
     }
+
+    const replayGame = () => {
+        const modalWrapper = document.querySelector('.modal-wrapper');
+        const replay = document.getElementById('replay');
+        replay.addEventListener('click', () => {
+            modalWrapper.style.display = "none";
+            array.forEach(cell => {
+                cell.innerHTML = "";
+            });
+            document.getElementById('popup').innerHTML = "";
+            origiBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            array.forEach(cell => {
+                cell.style.pointerEvents = 'auto';
+                
+            });
+            for(let i = 0; i < game.length; i++){
+                for(let j = 0; j < game.length; j++){
+                    game[i][j] = "";
+                }
+
+
+            }
+            board.length = 0;
+            if(chosenPlayer === "x"){
+                newBoard = ['x', 'o', 'x', 'o', 'x', 'o', 'x', 'o', 'o'];
+                // console.log('x was chosen');
+                // let x = "x";
+                // let o = "o";
+                // let values = [x, o];
+                // while(newBoard.length < 9) {
+                //     newBoard.push(values[newBoard.length % 2]);
+                // }
+                placeMark(players.one);
+                // newBoard = ['x', 'o', 'x', 'o', 'x', 'o', 'x', 'o', 'o'];
+            }
+            if(chosenPlayer === "o") {
+                // let x = "x";
+                // let o = "o";
+                // let values = [o, x];
+            
+                
+                // while(newBoard.length < 9) {
+                //     newBoard.push(values[newBoard.length % 2]);
+                // }
+                placeMark(players.two);
+                // newBoard = ['o', 'x', 'o', 'x', 'o', 'x', 'o', 'x', 'o'];
+            }
+
+
+
+        });
+        
+    }
+
+    const resetBoard = () => {
+        board.length = 0;
+
+    }
     
     // let origiBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -929,8 +977,9 @@ const gameflow = (() => {
 
     // let newBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     // minimax(newBoard, huPlayer);
-
     displayPages();
+    // choosePlayer();
+    replayGame();
     
     // updateOrigi();
 
@@ -940,7 +989,7 @@ const gameflow = (() => {
     
     
 
-    return {choosePlayer, addSymbol, game, divs, displayPages};
+    return {choosePlayer, addSymbol, game, divs, displayPages, chosenPlayer, replayGame, newBoard};
     
     
 

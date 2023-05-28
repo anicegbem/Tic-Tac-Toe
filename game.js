@@ -381,7 +381,6 @@ const gameflow = (() => {
     let aiPlayer = 'o';
 
     let huPlayer = 'x';
-
     
     
 
@@ -416,11 +415,20 @@ const gameflow = (() => {
             
         }
 
+        
+
+        
+        
+        
+
+    }
+
+    function clickHandler(sign) {
         array.forEach(cell => {
             cell.addEventListener('click', function() {
                 if(cell.innerHTML === "") {
                     if(nameX.value !== "" && nameO.value !== "") {
-                        cell.innerHTML = board[i++];
+                        cell.innerHTML = board.shift();
                         let strings = cell.id;
                         let one = parseInt(strings.charAt(0));
                         let two = parseInt(strings.charAt(1));
@@ -483,11 +491,6 @@ const gameflow = (() => {
                 
             })
         });
-
-        
-        
-        
-
     }
 
     // ai 
@@ -660,6 +663,7 @@ const gameflow = (() => {
     const choosePlayer = () => {
         one.addEventListener('click', () => {
            placeMark(players.one);
+           clickHandler(players.one);
            chosenPlayer = "x";
         //    replayGame();
            
@@ -669,6 +673,7 @@ const gameflow = (() => {
         two.addEventListener('click', () => {
             // replayGame()
             placeMark(players.two);
+            clickHandler(players.two);
             chosenPlayer = "o";
             
             // console.log(chosenPlayer);
@@ -698,6 +703,7 @@ const gameflow = (() => {
         let three = game[2].every(checkArray);
         if(one === true && two === true && three === true && value !== true){
             document.getElementById('popup').innerHTML = "Tie Game!";
+            toggleModal();
         }
         // game.forEach(g => {
         //     if(g.every(checkArray) === true) {

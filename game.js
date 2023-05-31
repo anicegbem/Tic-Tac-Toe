@@ -754,7 +754,7 @@ const gameflow = (() => {
         const names = Array.from(document.getElementsByClassName('player-names'));
         const start = document.getElementById('start');
         // const nameX = document.getElementById('player-name-x');
-        const nameO = document.getElementById('player-name-o');
+        // const nameO = document.getElementById('player-name-o');
         // const inner = Array.from(document.getElementsByClassName('cells'));
         const inner = Array.from(document.getElementsByClassName('container-inner'));
         // const playerX = document.getElementById('')
@@ -800,29 +800,48 @@ const gameflow = (() => {
                 nameO.style.display = "inline-block";
                 document.getElementById('prompt').style.display = "inline-block";
                 start.style.display = "inline-block";
-                start.addEventListener('click', function() {
-                    if(nameX.value !== '' && nameO.value !== '') {
-                        players.nameX = `${nameX.value}`
-                        players.nameO = nameO.value;
-                        // console.log(players.nameX);
-                        names.forEach(name => {
-                            name.style.display = "none";
-                        })
-                        // inner.style.display = "grid";
-                        inner.forEach(item => {
-                            item.style.display = "grid";
-                        })
+                names.forEach(name => {
+                    name.style.display = "inline-block";
+                })
+                // start.addEventListener('click', function() {
+                //     if(nameX.value !== '' && nameO.value !== '') {
+                //         players.nameX = `${nameX.value}`
+                //         players.nameO = nameO.value;
+                //         // console.log(players.nameX);
+                //         names.forEach(name => {
+                //             name.style.display = "none";
+                //         })
+                //         // inner.style.display = "grid";
+                //         inner.forEach(item => {
+                //             item.style.display = "grid";
+                //         })
         
-                    }
-                });
+                //     }
+                // });
                 // names.forEach(name => {
                 //     name.style.display = "inline-block";
                 // })
 
             }
             
+            
 
 
+        });
+        start.addEventListener('click', function() {
+            if(nameX.value !== '' && nameO.value !== '') {
+                players.nameX = `${nameX.value}`
+                players.nameO = nameO.value;
+                // console.log(players.nameX);
+                names.forEach(name => {
+                    name.style.display = "none";
+                })
+                // inner.style.display = "grid";
+                inner.forEach(item => {
+                    item.style.display = "grid";
+                })
+
+            }
         });
         
         // start.addEventListener('click', function() {
@@ -988,8 +1007,17 @@ const gameflow = (() => {
     const restartGame = () => {
         let restart = document.getElementById('restart');
         const modalWrapper = document.querySelector('.modal-wrapper');
+        const names = Array.from(document.getElementsByClassName('player-names'));
 
         restart.addEventListener('click', () => {
+            names.forEach(name => {
+                name.style.display = "none";
+            })
+            nameX.style.display = "none";
+            nameO.style.display = "none";
+            document.getElementById('prompt').style.display = "none";
+            document.getElementById('continue').style.display = "none";
+            document.getElementById('start').style.display = "none";
             console.log(huPlayer, aiPlayer);
             newGame();
             nameX.value = "";
@@ -1046,10 +1074,12 @@ const gameflow = (() => {
 
     // let newBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     // minimax(newBoard, huPlayer);
-    displayPages();
-    // choosePlayer();
+    // displayPages();
+    choosePlayer();
     replayGame();
     restartGame();
+    // displayPages();
+    choosePlayer();
     
     // updateOrigi();
 
@@ -1076,7 +1106,7 @@ const gameflow = (() => {
 //     //     return {first, second};
 //     // })
 
-gameflow.choosePlayer();
+gameflow.displayPages();
 
 
 

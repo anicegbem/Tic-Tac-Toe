@@ -38,6 +38,7 @@ const gameflow = (() => {
     const nameO = document.getElementById('player-name-o');
     let origiBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     let chosenPlayer = '';
+    let opp = '';
 
     // // ai 
     // let aiPlayer = 'o';
@@ -377,7 +378,7 @@ const gameflow = (() => {
 
 
     }
-
+    
     let aiPlayer = 'o';
 
     let huPlayer = 'x';
@@ -441,11 +442,9 @@ const gameflow = (() => {
 
                     if(nameX.value === "" || nameO.value === "") {
                         if(sign === players.one) {
-                            let items = ['x', 'o'];
-                            let empty;
-                            cell.innerHTML = items[0];
+                            cell.innerHTML = chosenPlayer;
                             updateOrigi();
-                            playComputer('o');
+                            playComputer(opp);
                             // console.log(getEmptyIndex(origiBoard))
                             // for(let i = 0; i < array.length; i++) {
                             //     if(array[i].innerHTML === "x") {
@@ -456,21 +455,18 @@ const gameflow = (() => {
                             //     break
                             // }
                             
-                            let strings = cell.id;
-                            let one = parseInt(strings.charAt(0));
-                            let two = parseInt(strings.charAt(1));
                             getWinner(players.one, players.two);
                             checkTie();
                             enterName();
             
                         }
                         if(sign === players.two) {
-                            huPlayer = 'o';
-                            aiPlayer = 'x'
+                            // huPlayer = 'o';
+                            // aiPlayer = 'x'
                             let items = ['o', 'x'];
-                            cell.innerHTML = items[0];
+                            cell.innerHTML = chosenPlayer;
                             updateOrigi();
-                            playComputer('x');
+                            playComputer(opp);
                             let strings = cell.id;
                             let one = parseInt(strings.charAt(0));
                             let two = parseInt(strings.charAt(1));
@@ -603,6 +599,11 @@ const gameflow = (() => {
             document.getElementById('popup').innerHTML = "You Lose!";
             toggleModal();
         }
+        if(minimax(origiBoard, aiPlayer).score === -10) {
+            stopClick();
+            document.getElementById('popup').innerHTML = "You Lose!";
+            toggleModal();
+        }
         // else if(minimax(origiBoard, aiPlayer) === -10) {
         //     getPopup(players.nameX);
         // }
@@ -665,6 +666,7 @@ const gameflow = (() => {
            placeMark(players.one);
            clickHandler(players.one);
            chosenPlayer = "x";
+           opp = "o";
         //    replayGame();
            
         //    console.log(chosenPlayer);
@@ -675,6 +677,7 @@ const gameflow = (() => {
             placeMark(players.two);
             clickHandler(players.two);
             chosenPlayer = "o";
+            opp = "x";
             
             // console.log(chosenPlayer);
             // enterName();
@@ -903,6 +906,7 @@ const gameflow = (() => {
         })
 
         two.addEventListener('click', function(){
+            console.log(huPlayer, aiPlayer);
             nameO.style.display = "inline";
             one.style.display = "none"; 
             two.style.display = "none";
@@ -916,6 +920,16 @@ const gameflow = (() => {
         const modalWrapper = document.querySelector('.modal-wrapper');
         const modalButton = document.querySelector('.modal-toggle');
         modalWrapper.style.display = "flex";
+
+    }
+
+    const newGame = () => {
+        const inner = Array.from(document.getElementsByClassName('container-inner'));
+        inner.forEach(item => {
+            item.style.display = "none";
+        });
+        multi.style.display = "inline-block";
+        single.style.display = "inline-block";
 
     }
 
@@ -942,7 +956,6 @@ const gameflow = (() => {
             }
             board.length = 0;
             if(chosenPlayer === "x"){
-                newBoard = ['x', 'o', 'x', 'o', 'x', 'o', 'x', 'o', 'o'];
                 // console.log('x was chosen');
                 // let x = "x";
                 // let o = "o";
@@ -972,6 +985,56 @@ const gameflow = (() => {
         
     }
 
+    const restartGame = () => {
+        let restart = document.getElementById('restart');
+        const modalWrapper = document.querySelector('.modal-wrapper');
+
+        restart.addEventListener('click', () => {
+            console.log(huPlayer, aiPlayer);
+            newGame();
+            nameX.value = "";
+            nameO.value = "";
+            chosenPlayer = "";
+            modalWrapper.style.display = "none";
+            array.forEach(cell => {
+                cell.innerHTML = "";
+            });
+            document.getElementById('popup').innerHTML = "";
+            origiBoard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            array.forEach(cell => {
+                cell.style.pointerEvents = 'auto';
+                
+            });
+            for(let i = 0; i < game.length; i++){
+                for(let j = 0; j < game.length; j++){
+                    game[i][j] = "";
+                }
+
+
+            }
+            board.length = 0;
+            if(chosenPlayer === "x"){
+                newBoard = ['x', 'o', 'x', 'o', 'x', 'o', 'x', 'o', 'o'];
+                placeMark(players.one);
+                
+                
+                
+            }
+            if(chosenPlayer === "o") {
+                placeMark(players.two);
+                
+        
+                
+            }
+
+        })
+        
+            
+
+    
+        
+    }
+
     const resetBoard = () => {
         board.length = 0;
 
@@ -986,6 +1049,7 @@ const gameflow = (() => {
     displayPages();
     // choosePlayer();
     replayGame();
+    restartGame();
     
     // updateOrigi();
 

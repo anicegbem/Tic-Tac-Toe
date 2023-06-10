@@ -17,11 +17,6 @@ body {
     grid-template-columns: repeat(3, 150px); 
     margin: 0 auto;
     width: 750px;
-
-    /* grid-template-areas: 
-    "one two three"
-    "four five six"
-    "seven eight nine"; */
     
     
 }
@@ -30,7 +25,6 @@ body {
     -webkit-filter: blur(0);
     filter: blur(0);
     opacity: 1;
-    /* -webkit-transition: opacity 500ms ease, -webkit-filter 500ms ease; */
     transition: opacity 500ms ease, -webkit-filter 500ms ease;
     transition: filter 500ms ease, opacity 500ms ease;
     transition: filter 500ms ease, opacity 500ms ease, -webkit-filter 500ms ease;
@@ -41,7 +35,7 @@ body {
 .modal--active .container-outer {
     filter: blur(8px);
     opacity: 1;
-    /* -webkit-filter: blur(8px); */
+   
 
 }
 
@@ -91,38 +85,10 @@ body {
     border: 1px solid #000;
     width: 150px;
     height: 150px;
-    /* border-right: 1px solid #000; */
+    
 }
 
 #one, #two, #continue, #prompt, #player-name-x, #player-name-o, #start, .container-inner, .single-player {
     display: none;
 }
 
-/* .cell-1 {
-    grid-area: one;
-}
-
-.cell-2 {
-    grid-area: two;
-}
-.cell-9 {
-    grid-area: nine;
-}
-.cell-3 {
-    grid-area: three;
-}
-.cell-4 {
-    grid-area: four;
-}
-.cell-5 {
-    grid-area: five;
-}
-.cell-6 {
-    grid-area: six;
-}
-.cell-7 {
-    grid-area: seven;
-}
-.cell-8 {
-    grid-area: eight;
-} */
